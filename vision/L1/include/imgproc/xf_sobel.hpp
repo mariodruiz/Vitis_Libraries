@@ -333,15 +333,14 @@ void xFSobelFilter3x3(xf::cv::Mat<SRC_T, ROWS, COLS, NPC>& _src_mat,
     XF_SNAME(WORDWIDTH_SRC) buf[3][(COLS >> XF_BITSHIFT(NPC))]; // Line buffer
     if (USE_URAM) {
 // clang-format off
-#pragma HLS array reshape variable=buf dim=1 factor=3 cyclic
 #pragma HLS RESOURCE variable=buf core=RAM_S2P_URAM
         // clang-format on
     } else {
 // clang-format off
 #pragma HLS RESOURCE variable=buf core=RAM_S2P_BRAM
-#pragma HLS ARRAY_PARTITION variable=buf complete dim=1
         // clang-format on
     }
+#pragma HLS ARRAY_PARTITION variable=buf complete dim=1
     row_ind = 1;
 
 Clear_Row_Loop:
@@ -845,14 +844,13 @@ void xFSobelFilter5x5(xf::cv::Mat<SRC_T, ROWS, COLS, NPC>& _src_mat,
     if (USE_URAM) {
 // clang-format off
 #pragma HLS RESOURCE variable=buf core=RAM_S2P_URAM
-#pragma HLS array reshape variable=buf dim=1 factor=5 cyclic
         // clang-format on
     } else {
 // clang-format off
 #pragma HLS RESOURCE variable=buf core=RAM_S2P_BRAM
-#pragma HLS ARRAY_PARTITION variable=buf complete dim=1
         // clang-format on
     }
+#pragma HLS ARRAY_PARTITION variable=buf complete dim=1
 
     row_ind = 2;
 
@@ -1694,14 +1692,13 @@ void xFSobelFilter7x7(xf::cv::Mat<SRC_T, ROWS, COLS, NPC>& _src_mat,
     if (USE_URAM) {
 // clang-format off
 #pragma HLS RESOURCE variable=buf core=RAM_S2P_URAM
-#pragma HLS array reshape variable=buf dim=1 factor=7 cyclic
         // clang-format on
     } else {
 // clang-format off
 #pragma HLS RESOURCE variable=buf core=RAM_S2P_BRAM
-#pragma HLS ARRAY_PARTITION variable=buf complete dim=1
         // clang-format on
     }
+#pragma HLS ARRAY_PARTITION variable=buf complete dim=1
     row_ind = 3;
 Clear_Row_Loop:
     for (col = 0; col < img_width; col++) {
